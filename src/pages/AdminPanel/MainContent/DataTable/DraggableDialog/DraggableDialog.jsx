@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,9 +5,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
-import Draggable from 'react-draggable';
 import Typography from '@mui/material/Typography';
-import { useDeletePost } from '../../hooks/mutations/post';
+import * as React from 'react';
+import Draggable from 'react-draggable';
+import { resources } from '../../../../../config/resources';
 
 function PaperComponent(props) {
     const nodeRef = React.useRef(null);
@@ -23,24 +23,22 @@ function PaperComponent(props) {
     );
 }
 
-export default function DraggableDialog({ data, open, onClose }) {
+function DraggableDialog({ data, open, onClose }) {
+    const resource = data.resource;
 
-    const deletePostMutation = useDeletePost();
+    const mainResource = resources[resource];
+
+    const delteteResourceMutation = mainResource.delete();
 
     const handleDelete = () => {
-        deletePostMutation.mutate({
+        delteteResourceMutation.mutate({
             id: data.id
         });
         onClose();
     }
 
-    console.log("DraggableDialog");
-
     return (
         <React.Fragment>
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
-                Open draggable dialog
-            </Button> */}
             <Dialog
                 open={open}
                 onClose={onClose}
@@ -54,12 +52,14 @@ export default function DraggableDialog({ data, open, onClose }) {
                     <DialogContentText>
                         Are you sure you want to delete the
                         <Typography
+                            variant='caption'
                             sx={{
                                 fontWeight: "bold",
                                 display: 'inline',
+                                fontSize: "17px",
                                 m: 0.5
                             }}>
-                            {data?.title}
+                            {data?.nameDialog}
                         </Typography>
                         information?
                     </DialogContentText>
@@ -74,3 +74,4 @@ export default function DraggableDialog({ data, open, onClose }) {
         </React.Fragment>
     );
 }
+export default DraggableDialog;

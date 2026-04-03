@@ -1,30 +1,20 @@
 import axios from "axios";
 import { httpRequest } from "../api/httpRequest";
 
-const userService = {
+const productService = {
 
-    async getUsers() {
+    async getProducts() {
         try {
-            const res = await httpRequest.get("users");
+            const res = await httpRequest.get("products");
             return res.data;
         } catch (error) {
             console.log(error)
         }
 
     },
-    async addUser(data) {
+    async addProduct(data) {
         try {
-            const res = await httpRequest.post("users", data);
-            return res.data;
-        } catch (error) {
-            console.log(error)
-        }
-
-    },
-
-    async updateUser(data) {
-        try {
-            const res = await httpRequest.put("users/" + data.id, data);
+            const res = await httpRequest.post("products", data);
             return res.data;
         } catch (error) {
             console.log(error)
@@ -32,9 +22,19 @@ const userService = {
 
     },
 
-    async deleteUser(data) {
+    async updateProduct(data) {
         try {
-            const res = await httpRequest.delete("users/" + data.id);
+            const res = await httpRequest.put("products/" + data.id, data);
+            return res.data;
+        } catch (error) {
+            console.log(error)
+        }
+
+    },
+
+    async deleteProduct(data) {
+        try {
+            const res = await httpRequest.delete("products/" + data.id);
             return res.data;
         } catch (error) {
             console.log(error)
@@ -43,4 +43,4 @@ const userService = {
     },
 
 }
-export default userService;
+export default productService;

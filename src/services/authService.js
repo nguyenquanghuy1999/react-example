@@ -5,7 +5,7 @@ const authService = {
 
     async login(user, pass) {
         try {
-            const res = await httpRequest.get("login", { user, pass });
+            const res = await httpRequest.post("login", { user, pass });
             return res.data;
         } catch (error) {
             console.log(error);

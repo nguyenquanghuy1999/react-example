@@ -1,17 +1,44 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import LayoutDefault from "./layouts/LayoutDefault"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import Dashboard from "./pages/Dashboard"
+
+import { Fragment } from "react";
+import routes from "./routes";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LayoutDefault> <Home /> </LayoutDefault>} />
-          <Route path='/about' element={<LayoutDefault> <About /> </LayoutDefault>} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          {routes.map((route, index) => {
+            let Layout;
+
+            if (route.layout) {
+              Layout = route.layout;
+            } else if (route.layout === null) {
+              Layout = Fragment;
+            }
+
+            const Page = route.component;
+
+            let element = (
+              <Layout>
+                <Page />
+              </Layout>
+            )
+
+            if (route.protected) {
+              element = <ProtectedRoute> {element} </ProtectedRoute>
+            }
+
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={element}
+              />
+            )
+          })}
         </Routes>
       </BrowserRouter >
     </>

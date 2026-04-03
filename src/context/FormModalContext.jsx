@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FormModal from '../components/FormModal';
+
 
 
 export const FormModalContext = React.createContext();
@@ -17,27 +17,25 @@ export default function FormModalProvider({ children }) {
         isEdit: false
     })
 
-    const modalOpen = () => setOpen(true);
+    const openModal = () => setOpen(true);
 
-    const modalClose = () => {
+    const closeModal = () => {
         setOpen(false);
     };
-    console.log("--------FormModalContext-----------");
-
 
     return (
         <FormModalContext value={{
-            modalOpen,
+            openModal,
             setData
-        }}
-        >
+        }}>
+
             {children}
+{/* 
             <FormModal
                 data={data}
-                setData={setData}
                 open={open}
-                close={modalClose}
-            />
+                onClose={closeModal}
+            /> */}
 
         </FormModalContext>
     );

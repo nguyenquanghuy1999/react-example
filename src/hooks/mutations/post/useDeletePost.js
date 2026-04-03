@@ -1,13 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import postService from "../../../services/postService"
-import { useInvalidatePosts } from "./useInvalidatePosts";
+import { postKeys } from "../../../config/queryKeys/postKeys";
+import useInvalidate from "../useInvalidate";
 
 const useDeletePost = () => {
-    const invalidatePosts = useInvalidatePosts();
+    const invalidate = useInvalidate(postKeys.all);
 
     return useMutation({
         mutationFn: postService.deletePost,
-        onSuccess: invalidatePosts
+        onSuccess: invalidate
     })
 
 }
