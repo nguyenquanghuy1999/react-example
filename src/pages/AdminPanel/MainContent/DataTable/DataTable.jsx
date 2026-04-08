@@ -5,15 +5,16 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
-import DraggableDialog from './DraggableDialog/DraggableDialog';
 import { resources } from '../../../../config/resources';
+import useResourceQuery from '../../../../hooks/queries/';
+import DraggableDialog from './DraggableDialog/DraggableDialog';
 
 
 function DataTable({ resource, onOpenForm }) {
 
-    const mainResource = resources[resource];
+    const resourceQuery = useResourceQuery(resource);
 
-    const resourceQuery = mainResource.get();
+    const activeResource = resources[resource];
 
     const { data: resourceData, isLoading } = resourceQuery;
 
@@ -29,7 +30,7 @@ function DataTable({ resource, onOpenForm }) {
     };
 
     const columns = [
-        ...mainResource.columns,
+        ...activeResource.columns,
         {
             field: 'actions',
             headerName: 'Actions',
@@ -38,7 +39,7 @@ function DataTable({ resource, onOpenForm }) {
             renderCell: (params) => {
                 const handleEdit = () => {
                     onOpenForm({
-                        item: resource,
+                        resourceKey: resource,
                         isEdit: true,
                         isCreate: false,
                         dataEdit: params.row,
@@ -47,11 +48,11 @@ function DataTable({ resource, onOpenForm }) {
 
                 const handleDelete = () => {
                     handleOpenDraggableDialog();
-                    const nameDialog = mainResource.nameDialog;
+                    const infoDialog = activeResource.infoDialog;
                     setData({
                         ...params.row,
                         resource,
-                        nameDialog: params.row[nameDialog]
+                        infoDialog: params.row[infoDialog]
                     });
                 }
 

@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const drawerWidth = 240;
 
-function Header({ item, onMenuIconClick }) {
+function Header({ resourceKey, onMenuIconClick }) {
 
     return (
         <AppBar
@@ -28,7 +28,7 @@ function Header({ item, onMenuIconClick }) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                    {capitalizeFirstLetter(item)}
+                    {capitalizeFirstLetter(resourceKey)}
                 </Typography>
             </Toolbar>
         </AppBar>

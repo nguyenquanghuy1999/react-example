@@ -1,30 +1,19 @@
-import axios from "axios";
 import { httpRequest } from "../api/httpRequest";
 
-const productService = {
+const resourceService = {
 
-    async getProducts() {
+    async get(resource) {
         try {
-            const res = await httpRequest.get("products");
+            const res = await httpRequest.get(resource);
             return res.data;
         } catch (error) {
             console.log(error)
         }
 
     },
-    async addProduct(data) {
+    async create(resource, payload) {
         try {
-            const res = await httpRequest.post("products", data);
-            return res.data;
-        } catch (error) {
-            console.log(error)
-        }
-
-    },
-
-    async updateProduct(data) {
-        try {
-            const res = await httpRequest.put("products/" + data.id, data);
+            const res = await httpRequest.post(resource, payload);
             return res.data;
         } catch (error) {
             console.log(error)
@@ -32,9 +21,19 @@ const productService = {
 
     },
 
-    async deleteProduct(data) {
+    async update(resource, payload) {
         try {
-            const res = await httpRequest.delete("products/" + data.id);
+            const res = await httpRequest.put(`${resource}/` + payload.id, payload);
+            return res.data;
+        } catch (error) {
+            console.log(error)
+        }
+
+    },
+
+    async delete(resource, id) {
+        try {
+            const res = await httpRequest.delete(`${resource}/` + id);
             return res.data;
         } catch (error) {
             console.log(error)
@@ -43,4 +42,4 @@ const productService = {
     },
 
 }
-export default productService;
+export default resourceService;

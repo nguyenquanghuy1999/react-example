@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import Draggable from 'react-draggable';
-import { resources } from '../../../../../config/resources';
+import useResourceMutation from '../../../../../hooks/mutations';
 
 function PaperComponent(props) {
     const nodeRef = React.useRef(null);
@@ -24,16 +24,13 @@ function PaperComponent(props) {
 }
 
 function DraggableDialog({ data, open, onClose }) {
+
     const resource = data.resource;
 
-    const mainResource = resources[resource];
-
-    const delteteResourceMutation = mainResource.delete();
+    const { deleteResourceMutation } = useResourceMutation(resource);
 
     const handleDelete = () => {
-        delteteResourceMutation.mutate({
-            id: data.id
-        });
+        deleteResourceMutation.mutate(data.id);
         onClose();
     }
 
@@ -59,7 +56,7 @@ function DraggableDialog({ data, open, onClose }) {
                                 fontSize: "17px",
                                 m: 0.5
                             }}>
-                            {data?.nameDialog}
+                            {data?.infoDialog}
                         </Typography>
                         information?
                     </DialogContentText>

@@ -18,7 +18,7 @@ function AdminPanel() {
 
     const initialResource = resource || Object.keys(resources)[0];
 
-    const [item, setItem] = React.useState(initialResource);
+    const [resourceKey, setResourceKey] = React.useState(initialResource);
 
     const [formData, setFormData] = React.useState({})
 
@@ -50,20 +50,20 @@ function AdminPanel() {
             <CssBaseline />
 
             <Header
-                item={item}
+                resourceKey={resourceKey}
                 onMenuIconClick={handleDrawerToggle}
             />
 
             <Sidebar
-                item={item}
+                resourceKey={resourceKey}
                 mobileOpen={mobileOpen}
                 onTransitionEnd={handleDrawerTransitionEnd}
                 onClose={handleDrawerClose}
-                setItem={setItem}
+                setResourceKey={setResourceKey}
             />
 
             <MainContent
-                item={item}
+                resourceKey={resourceKey}
                 onOpenForm={handleOpenForm}
             />
 

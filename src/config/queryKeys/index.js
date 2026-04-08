@@ -1,3 +1,1 @@
-export { postKeys } from "./postKeys";
-export { userKeys } from "./userKeys";
-export { productKeys } from "./productKeys"; 
+export { default } from "./queryKeys";

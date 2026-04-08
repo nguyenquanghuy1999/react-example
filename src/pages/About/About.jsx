@@ -1,8 +1,4 @@
-
-
 function About() {
-
-    console.log("page about");
 
     return (
         <>

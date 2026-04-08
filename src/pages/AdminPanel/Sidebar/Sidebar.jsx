@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-function Sidebar({ item, setItem, mobileOpen, onTransitionEnd, onClose }) {
+function Sidebar({ resourceKey, setResourceKey, mobileOpen, onTransitionEnd, onClose }) {
 
     const navigate = useNavigate();
 
@@ -29,12 +29,12 @@ function Sidebar({ item, setItem, mobileOpen, onTransitionEnd, onClose }) {
                     <ListItem key={resource} disablePadding>
                         <ListItemButton
                             onClick={() => {
-                                setItem(resource);
+                                setResourceKey(resource);
                                 navigate("/admin/" + resource)
                             }}
                             style={{
-                                background: resource === item && "#1976d2",
-                                color: resource === item && 'white'
+                                background: resource === resourceKey && "#1976d2",
+                                color: resource === resourceKey && 'white'
                             }}
                         >
                             <ListItemIcon >

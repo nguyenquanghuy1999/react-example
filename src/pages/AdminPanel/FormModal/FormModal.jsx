@@ -6,12 +6,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
-
 import Dialog from '@mui/material/Dialog';
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import { styled } from '@mui/material/styles';
-import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
+import React, { Fragment } from 'react';
+import { useForm } from 'react-hook-form';
 import { resources } from '../../../config/resources';
+import useResourceMutation from '../../../hooks/mutations';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -22,49 +25,37 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 
+
 function FormModal({ open, onClose, data = {} }) {
-    const { item, isCreate, isEdit, dataEdit } = data;
 
-    const resource = item.toLowerCase();
+    const { resourceKey, isCreate, isEdit, dataEdit } = data;
 
-    const mainResource = resources[resource];
+    const { createResourceMutation, updateResourceMutation } = useResourceMutation(resourceKey);
 
-    const createResourceMutation = mainResource.create();
-    const updateResourceMutation = mainResource.update();
+    const activeResource = resources[resourceKey];
 
-    const fields = resources[resource].columns;
+    const fields = activeResource.columns;
 
-    const getInitialInputValue = () => {
-        if (isEdit) {
-            return dataEdit;
-        } else {
-            return fields.reduce((obj, { field }) => {
-                if (field !== "id") {
-                    obj[field] = "";
-                };
-                return obj;
-            }, {})
-        }
-    }
+    const schema = activeResource.schema;
 
-    const [inputValue, setInputValue] = useState(getInitialInputValue);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
-    const handleButtonSubmit = () => {
-        
-        const payload = fields.reduce((obj, { field }) => {
-            obj[field] = inputValue[field];
-            return obj;
-        }, {});
-
+    const onSubmit = (data) => {
+        const payload = data;
         if (isCreate) {
             createResourceMutation.mutate(payload)
         } else {
-            payload.id = inputValue.id;
+            payload.id = dataEdit.id;
             updateResourceMutation.mutate(payload)
         }
-
         onClose();
-    }
+    };
 
     return (
         <React.Fragment>
@@ -74,8 +65,8 @@ function FormModal({ open, onClose, data = {} }) {
                 open={open}
             >
                 <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                    {isCreate && item.slice(0, -1) + " New"}
-                    {isEdit && item.slice(0, -1) + " Edit"}
+                    {isCreate && resourceKey.slice(0, -1) + " New"}
+                    {isEdit && resourceKey.slice(0, -1) + " Edit"}
                 </DialogTitle>
                 <IconButton
                     aria-label="close"
@@ -98,20 +89,23 @@ function FormModal({ open, onClose, data = {} }) {
                     >
                         {fields.map(({ field, headerName }) => {
                             return headerName == "Id" ? null :
-                                <TextField
-                                    key={field}
-                                    value={inputValue[field]}
-                                    onChange={(e) => setInputValue(prev => ({ ...prev, [field]: e.target.value }))
-                                    }
-                                    id="outlined-basic"
-                                    label={headerName}
-                                    variant="outlined"
-                                />
+                                <Fragment key={field}>
+                                    <TextField
+                                        defaultValue={dataEdit?.[field]}
+                                        {...register(field)}
+                                        id="outlined-basic"
+                                        label={headerName}
+                                        variant="outlined"
+                                    />
+                                    {errors[field] && <Typography sx={{ color: "red" }}>
+                                        {errors[field].message}
+                                    </Typography>}
+                                </ Fragment>
                         })}
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleButtonSubmit}>
+                    <Button autoFocus onClick={handleSubmit(onSubmit)}>
                         {isCreate ? "Create" : "Update"}
                     </Button>
                 </DialogActions>

@@ -4,11 +4,11 @@ import Toolbar from "@mui/material/Toolbar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DataTable from "./DataTable";
 
-function MainContent({ item, onOpenForm }) {
+function MainContent({ resourceKey, onOpenForm }) {
 
     const handleClick = () => {
         onOpenForm({
-            item: item,
+            resourceKey: resourceKey,
             isCreate: true,
             isEdit: false,
         })
@@ -31,7 +31,7 @@ function MainContent({ item, onOpenForm }) {
                 </Button>
             </Box>
             <DataTable
-                resource={item}
+                resource={resourceKey}
                 onOpenForm={onOpenForm}
             />
         </Box>

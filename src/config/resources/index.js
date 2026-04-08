@@ -1,44 +1,49 @@
-import { useCreatePost, useDeletePost, useUpdatePost } from "../../hooks/mutations/post";
-import { useCreateProduct, useUpdateProduct, useDeleteProduct } from "../../hooks/mutations/product";
-import { useCreateUser, useDeleteUser, useUpdateUser } from "../../hooks/mutations/user";
-import { usePosts, useProducts, useUsers } from "../../hooks/queries";
+import * as yup from "yup";
 
 export const resources = {
     posts: {
-        nameDialog: "title",
+        infoDialog: "title",
         columns: [
-            { field: "id", headerName: "Id", flex: 1 },
-            { field: "title", headerName: "Title", flex: 1 },
-            { field: "description", headerName: "Description", flex: 1 },
+            {
+                field: "id", headerName: "Id", flex: 1
+            },
+            {
+                field: "title",
+                headerName: "Title",
+                flex: 1,
+            },
+            {
+                field: "description",
+                headerName: "Description",
+                flex: 1,
+            },
         ],
-        get: usePosts,
-        create: useCreatePost,
-        update: useUpdatePost,
-        delete: useDeletePost
+        schema: yup.object({
+            title: yup.string().required(),
+            description: yup.string().required(),
+        })
+
     },
     users: {
-        nameDialog: "name",
+        infoDialog: "name",
         columns: [
             { field: "id", headerName: "Id", flex: 1 },
             { field: "name", headerName: "Name", flex: 1 },
             { field: "address", headerName: "Address", flex: 1 },
         ],
-        get: useUsers,
-        create: useCreateUser,
-        update: useUpdateUser,
-        delete: useDeleteUser
+        schema: yup.object({
+            name: yup.string().required("k trống!"),
+            address: yup.string().required("K để trống!")
+        })
     },
     products: {
-        nameDialog: "name",
+        infoDialog: "name",
         columns: [
             { field: "id", headerName: "Id", flex: 1 },
             { field: "name", headerName: "Name", flex: 1 },
             { field: "price", headerName: "Price", flex: 1 },
             { field: "company", headerName: "Company", flex: 1 },
         ],
-        get: useProducts,
-        create: useCreateProduct,
-        update: useUpdateProduct,
-        delete: useDeleteProduct
-    }
+    },
+
 };
