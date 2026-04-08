@@ -89,7 +89,7 @@ function DataTable({ resource, onOpenForm }) {
             <DataGrid
                 key={resource}
                 rows={resourceData}
-                getRowId={(row) => row.id}
+                getRowId={(row) => row.id ?? row._id ?? Math.random().toString()}
                 columns={columns}
                 loading={isLoading}
                 initialState={{
