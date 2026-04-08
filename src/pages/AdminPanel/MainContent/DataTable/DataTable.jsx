@@ -18,6 +18,11 @@ function DataTable({ resource, onOpenForm }) {
 
     const { data: resourceData, isLoading } = resourceQuery;
 
+    const rowsWithId = resourceData?.map((row, index) => ({
+        id: row.id ?? index, // hoặc row._id hay trường duy nhất khác nếu có
+        ...row,
+    }));
+
     const [DraggableDialogOpen, setDraggableDialogOpen] = useState(false);
     const [data, setData] = useState(null);
 
@@ -83,7 +88,7 @@ function DataTable({ resource, onOpenForm }) {
         <Box sx={{ maxHeight: 400, width: '100%' }}>
             <DataGrid
                 key={resource}
-                rows={resourceData}
+                rows={rowsWithId}
                 columns={columns}
                 loading={isLoading}
                 initialState={{
