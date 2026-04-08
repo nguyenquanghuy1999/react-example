@@ -30,10 +30,10 @@ function MainContent({ resourceKey, onOpenForm }) {
                     Create
                 </Button>
             </Box>
-            <DataTable
+            {/* <DataTable
                 resource={resourceKey}
                 onOpenForm={onOpenForm}
-            />
+            /> */}
         </Box>
 
     )
