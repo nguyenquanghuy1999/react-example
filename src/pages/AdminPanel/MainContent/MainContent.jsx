@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-// import DataTable from "./DataTable";
+import DataTable from "./DataTable";
 
 function MainContent({ resourceKey, onOpenForm }) {
 
@@ -30,10 +30,10 @@ function MainContent({ resourceKey, onOpenForm }) {
                     Create
                 </Button>
             </Box>
-            {/* <DataTable
+            <DataTable
                 resource={resourceKey}
                 onOpenForm={onOpenForm}
-            /> */}
+            />
         </Box>
 
     )
