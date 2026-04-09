@@ -17,6 +17,8 @@ function DataTable({ resource, onOpenForm }) {
     const activeResource = resources[resource];
 
     const { data: resourceData, isLoading } = resourceQuery;
+    console.log(resourceData);
+
 
     const [DraggableDialogOpen, setDraggableDialogOpen] = useState(false);
     const [data, setData] = useState(null);
@@ -83,11 +85,10 @@ function DataTable({ resource, onOpenForm }) {
         <Box sx={{ maxHeight: 400, width: '100%' }}>
             <DataGrid
                 key={resource}
-                rows={resourceData}
+                rows={resourceData || []}
                 columns={columns}
                 loading={isLoading}
-                getRowId={(row, index) => row.id
-                }
+                getRowId={(row) => row.id}
                 initialState={{
                     pagination: {
                         paginationModel: {
