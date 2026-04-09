@@ -17,7 +17,6 @@ function DataTable({ resource, onOpenForm }) {
     const activeResource = resources[resource];
 
     const { data: resourceData, isLoading } = resourceQuery;
-    console.log(resourceData);
 
 
     const [DraggableDialogOpen, setDraggableDialogOpen] = useState(false);
