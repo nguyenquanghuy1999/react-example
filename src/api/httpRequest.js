@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const httpRequest = axios.create({
-    baseURL: "http://localhost:3000/"
+    baseURL: import.meta.env.VITE_BASE_URL
 })
 
 httpRequest.interceptors.request.use((config) => {
