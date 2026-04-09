@@ -1,13 +1,16 @@
 {
   "name": "my-app",
   "private": true,
+  "homepage": "https://nguyenquanghuy1999.github.io/react-example",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -26,6 +29,7 @@
     "axios": "^1.13.5",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.20",
+    "gh-pages": "^6.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-draggable": "^4.5.0",

@@ -14,6 +14,7 @@ import React, { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { resources } from '../../../config/resources';
 import useResourceMutation from '../../../hooks/mutations';
+import * as yup from "yup";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -36,7 +37,7 @@ function FormModal({ open, onClose, data = {} }) {
 
     const fields = activeResource.columns;
 
-    const schema = activeResource.schema;
+    const schema = activeResource.validationSchema ?? yup.object({});
 
     const {
         register,
