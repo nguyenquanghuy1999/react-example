@@ -86,6 +86,8 @@ function DataTable({ resource, onOpenForm }) {
                 rows={resourceData}
                 columns={columns}
                 loading={isLoading}
+                getRowId={(row, index) => index ?? row.id
+                }
                 initialState={{
                     pagination: {
                         paginationModel: {
