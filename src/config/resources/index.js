@@ -36,14 +36,14 @@ export const resources = {
             address: yup.string().required("K để trống!")
         })
     },
-    products: {
-        infoDialog: "name",
-        columns: [
-            { field: "id", headerName: "Id", flex: 1 },
-            { field: "name", headerName: "Name", flex: 1 },
-            { field: "price", headerName: "Price", flex: 1 },
-            { field: "company", headerName: "Company", flex: 1 },
-        ],
-    },
+    // products: {
+    //     infoDialog: "name",
+    //     columns: [
+    //         { field: "id", headerName: "Id", flex: 1 },
+    //         { field: "name", headerName: "Name", flex: 1 },
+    //         { field: "price", headerName: "Price", flex: 1 },
+    //         { field: "company", headerName: "Company", flex: 1 },
+    //     ],
+    // },
 
 };
