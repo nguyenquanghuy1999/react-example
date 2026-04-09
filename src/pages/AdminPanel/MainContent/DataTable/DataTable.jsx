@@ -85,7 +85,7 @@ function DataTable({ resource, onOpenForm }) {
         <Box sx={{ maxHeight: 400, width: '100%' }}>
             <DataGrid
                 key={resource}
-                rows={(resourceData || []).map((row, index) => ({
+                rows={((Array.isArray(resourceData) ? resourceData : [])).map((row, index) => ({
                     ...row,
                     id: row.id ?? index // dùng id hiện có, nếu không có thì dùng index làm id
                 }))}
