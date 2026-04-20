@@ -2,12 +2,12 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { resources } from '../../config/resources';
-import NotFound from '../NotFound';
+import { resources } from '@/config/resources';
 import FormModal from './FormModal/FormModal';
 import Header from './Header/Header';
 import MainContent from './MainContent/MainContent';
 import Sidebar from './Sidebar/Sidebar';
+import NotFound from '../NotFound';
 
 const validResources = Object.keys(resources);
 

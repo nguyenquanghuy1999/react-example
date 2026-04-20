@@ -1,5 +1,6 @@
-import authApi from "../api/authApi";
-import { httpRequest } from "../api/httpRequest"
+import { httpRequest } from "@/api/httpRequest";
+import { deleteToken } from "@/utils/token";
+
 
 const authService = {
 
@@ -13,7 +14,7 @@ const authService = {
     },
 
     logout() {
-        authApi.deleteToken();
+        deleteToken();
     }
 }
 export default authService;

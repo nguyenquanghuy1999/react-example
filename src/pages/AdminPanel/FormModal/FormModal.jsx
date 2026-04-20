@@ -12,9 +12,9 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React, { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
-import { resources } from '../../../config/resources';
-import useResourceMutation from '../../../hooks/mutations';
 import * as yup from "yup";
+import useResourceMutation from '@/hooks/mutations';
+import { resources } from '@/config/resources';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

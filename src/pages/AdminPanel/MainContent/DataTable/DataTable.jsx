@@ -5,10 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
-import { resources } from '../../../../config/resources';
-import useResourceQuery from '../../../../hooks/queries/';
 import DraggableDialog from './DraggableDialog/DraggableDialog';
-
+import useResourceQuery from '@/hooks/queries';
+import { resources } from '@/config/resources';
 
 function DataTable({ resource, onOpenForm }) {
 

@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import Draggable from 'react-draggable';
-import useResourceMutation from '../../../../../hooks/mutations';
+import useResourceMutation from '@/hooks/mutations';
 
 function PaperComponent(props) {
     const nodeRef = React.useRef(null);

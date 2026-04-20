@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import resourceService from "../../services/resourceService";
+import resourceService from "@/services/resourceService";
 
 const useResourceQuery = (resource) => {
     return useQuery({

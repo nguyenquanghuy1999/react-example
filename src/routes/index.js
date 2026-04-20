@@ -1,8 +1,9 @@
-import MainLayout from "../layouts/MainLayout";
-import About from "../pages/About";
-import AdminPanel from "../pages/AdminPanel";
-import Home from "../pages/Home";
-import NotFound from "../pages/NotFound"
+import MainLayout from "@/layouts/MainLayout";
+import About from "@/pages/About";
+import AdminPanel from "@/pages/AdminPanel";
+import Home from "@/pages/Home";
+import NotFound from "@/pages/NotFound";
+
 
 const routes = [
     { path: '/', component: Home, layout: MainLayout },

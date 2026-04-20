@@ -2,8 +2,8 @@ import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Toolbar from '@mui/material/Toolbar';
-import { capitalizeFirstLetter } from "../../../utils/string";
 import MenuIcon from "@mui/icons-material/Menu";
+import { capitalizeFirstLetter } from "@/utils/string";
 
 const drawerWidth = 240;
 
