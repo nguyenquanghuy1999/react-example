@@ -12,11 +12,12 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: ${ {secrets.USERNAME }}
+          username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }} 
           port: 22
           script: | 
               cd /var/www/react-example
+              git fetch orgin
               git checkout main
               git pull
               npm install
