@@ -17,8 +17,7 @@ jobs:
           port: 22
           script: | 
               cd /var/www/react-example
-              git fetch orgin
-              git checkout main
-              git pull
+              git pull origin main
               npm install
               npm run build
+              systemctl restart nginx
