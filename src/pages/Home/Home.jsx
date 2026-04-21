@@ -1,7 +1,7 @@
 function Home() {
     return (
         <>
-            <h1>Home Page abc da cap nhat</h1>
+            <h1>Home Page test</h1>
             <p>context</p>
         </>
     )
