@@ -13,12 +13,12 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |  
-              cd /var/www/react-example/
               export NVM_DIR=~/.nvm
               source ~/.nvm/nvm.sh
+              cd /var/www/react-example/
               git fetch origin
               git checkout main
               git pull
