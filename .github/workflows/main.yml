@@ -19,6 +19,7 @@ jobs:
               cd /var/www/react-example/
               export NVM_DIR=~/.nvm
               source ~/.nvm/nvm.sh
+              git stash
               git pull origin main
               npm install
               npm run build
