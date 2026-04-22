@@ -16,7 +16,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |  
-              cd /home/deploy/web/react-example/
+              cd /var/www/react-example/
               export NVM_DIR=~/.nvm
               source ~/.nvm/nvm.sh
               git pull origin main
