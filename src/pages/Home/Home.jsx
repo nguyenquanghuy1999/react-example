@@ -1,7 +1,7 @@
 function Home() {
     return (
         <>
-            <h1>Home Page them moi nhu lon</h1>
+            <h1>Home Page done</h1>
         </>
     )
 }
