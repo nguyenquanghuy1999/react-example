@@ -2,4 +2,5 @@ services:
   react:
     build: .
     ports:
-      - "4000:5173"
+      - "4000:80"
+
