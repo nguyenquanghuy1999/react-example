@@ -1,6 +1,7 @@
+import React from "react";
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const isAdmin = true;
 
     if (!isAdmin) {

@@ -7,7 +7,12 @@ import { capitalizeFirstLetter } from "@/utils/string";
 
 const drawerWidth = 240;
 
-function Header({ resourceKey, onMenuIconClick }) {
+type HeaderProps = {
+    resourceKey: string,
+    onMenuIconClick: () => void
+}
+
+function Header({ resourceKey, onMenuIconClick } : HeaderProps) {
 
     return (
         <AppBar

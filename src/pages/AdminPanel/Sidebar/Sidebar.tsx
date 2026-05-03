@@ -13,10 +13,26 @@ import { capitalizeFirstLetter } from "@/utils/string";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const drawerWidth = 240;
 
-function Sidebar({ resourceKey, setResourceKey, mobileOpen, onTransitionEnd, onClose }) {
+type SidebarProps = {
+    resourceKey: string,
+    setResourceKey: React.Dispatch<React.SetStateAction<string>>,
+    mobileOpen: boolean,
+    onTransitionEnd: () => void,
+    onClose: () => void
+
+}
+
+function Sidebar({
+    resourceKey,
+    setResourceKey,
+    mobileOpen,
+    onTransitionEnd,
+    onClose
+}: SidebarProps) {
 
     const navigate = useNavigate();
 
@@ -33,8 +49,8 @@ function Sidebar({ resourceKey, setResourceKey, mobileOpen, onTransitionEnd, onC
                                 navigate("/admin/" + resource)
                             }}
                             style={{
-                                background: resource === resourceKey && "#1976d2",
-                                color: resource === resourceKey && 'white'
+                                background: resource === resourceKey ? "#1976d2" : undefined,
+                                color: resource === resourceKey ? 'white' : undefined
                             }}
                         >
                             <ListItemIcon >

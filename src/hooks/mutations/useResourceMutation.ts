@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import resourceService from "@/services/resourceService";
 
-const useResourceMutation = (resource) => {
+const useResourceMutation = (resource: string) => {
 
     const queryClient = useQueryClient();
 
@@ -10,17 +10,17 @@ const useResourceMutation = (resource) => {
     };
 
     const createResourceMutation = useMutation({
-        mutationFn: payload => resourceService.create(resource, payload),
+        mutationFn: (payload: Record<string, any>) => resourceService.create(resource, payload),
         onSuccess: invalidateQueries
     })
 
     const updateResourceMutation = useMutation({
-        mutationFn: payload => resourceService.update(resource, payload),
+        mutationFn: (payload: Record<string, any>) => resourceService.update(resource, payload),
         onSuccess: invalidateQueries
     })
 
     const deleteResourceMutation = useMutation({
-        mutationFn: id => resourceService.delete(resource, id),
+        mutationFn: (id: string | number) => resourceService.delete(resource, id),
         onSuccess: invalidateQueries
     })
 

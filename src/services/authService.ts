@@ -4,7 +4,7 @@ import { deleteToken } from "@/utils/token";
 
 const authService = {
 
-    async login(user, pass) {
+    async login(user: string, pass: string) {
         try {
             const res = await httpRequest.post("login", { user, pass });
             return res.data;

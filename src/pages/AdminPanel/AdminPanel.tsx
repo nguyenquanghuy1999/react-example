@@ -8,14 +8,15 @@ import Header from './Header/Header';
 import MainContent from './MainContent/MainContent';
 import Sidebar from './Sidebar/Sidebar';
 import NotFound from '../NotFound';
+import OpenFormData from '@/types';
 
 const validResources = Object.keys(resources);
 
 function AdminPanel() {
 
-    const { resource } = useParams();
+    const { resource } = useParams<{ resource?: string }>();
 
-    if (!validResources.includes(resource) && resource) {
+    if (resource && !validResources.includes(resource)) {
         return <NotFound />
     }
 
@@ -27,7 +28,7 @@ function AdminPanel() {
 
     const [resourceKey, setResourceKey] = React.useState(initialResource);
 
-    const [formData, setFormData] = React.useState({})
+    const [formData, setFormData] = React.useState<OpenFormData>();
 
     const closeModal = () => setIsModalOpen(false);
     const openModal = () => setIsModalOpen(true);
@@ -47,7 +48,7 @@ function AdminPanel() {
         }
     };
 
-    const handleOpenForm = (data) => {
+    const handleOpenForm = (data: OpenFormData) => {
         setFormData(data)
         openModal();
     }
@@ -74,10 +75,13 @@ function AdminPanel() {
                 onOpenForm={handleOpenForm}
             />
 
-            {isModalOpen && <FormModal
-                open={isModalOpen}
-                onClose={closeModal}
-                data={formData} />
+            {isModalOpen &&
+                formData &&
+                <FormModal
+                    open={isModalOpen}
+                    onClose={closeModal}
+                    data={formData}
+                />
             }
         </Box >
     );

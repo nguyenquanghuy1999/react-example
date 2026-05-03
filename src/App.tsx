@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import routes from "./routes";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {routes.map((route, index) => {
-            let Layout;
+            let Layout = route.layout || React.Fragment;
 
             if (route.layout) {
               Layout = route.layout;

@@ -3,8 +3,14 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DataTable from "./DataTable";
+import OpenFormData from "@/types";
 
-function MainContent({ resourceKey, onOpenForm }) {
+type MainContentProps = {
+    resourceKey: string,
+    onOpenForm: (data: OpenFormData) => void
+}
+
+function MainContent({ resourceKey, onOpenForm }: MainContentProps) {
 
     const handleClick = () => {
         onOpenForm({

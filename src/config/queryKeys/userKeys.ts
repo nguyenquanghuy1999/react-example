@@ -1,7 +1,7 @@
 export const userKeys = {
     all: ['users'],
     lists: () => [...userKeys.all, 'list'],
-    list: (filters) => [...userKeys.lists(), { filters }],
+    list: (filters: string) => [...userKeys.lists(), { filters }],
     details: () => [...userKeys.all, 'detail'],
-    detail: (id) => [...userKeys.details(), id],
+    detail: (id: number) => [...userKeys.details(), id],
 }

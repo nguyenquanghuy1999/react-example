@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import useResourceMutation from '@/hooks/mutations';
 import { resources } from '@/config/resources';
+import OpenFormData from '@/types';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -26,14 +27,21 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 
+type FromModalProps = {
+    open: boolean,
+    onClose: () => void,
+    data: OpenFormData
+}
 
-function FormModal({ open, onClose, data = {} }) {
+type ResourceKey = keyof typeof resources;
+
+function FormModal({ open, onClose, data }: FromModalProps) {
 
     const { resourceKey, isCreate, isEdit, dataEdit } = data;
 
     const { createResourceMutation, updateResourceMutation } = useResourceMutation(resourceKey);
 
-    const activeResource = resources[resourceKey];
+    const activeResource = resources[resourceKey as ResourceKey];
 
     const fields = activeResource.columns;
 
@@ -43,16 +51,16 @@ function FormModal({ open, onClose, data = {} }) {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm({
+    } = useForm<Record<string, any>>({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: Record<string, any>) => {
         const payload = data;
         if (isCreate) {
             createResourceMutation.mutate(payload)
         } else {
-            payload.id = dataEdit.id;
+            payload.id = dataEdit?.id;
             updateResourceMutation.mutate(payload)
         }
         onClose();
@@ -99,7 +107,7 @@ function FormModal({ open, onClose, data = {} }) {
                                         variant="outlined"
                                     />
                                     {errors[field] && <Typography sx={{ color: "red" }}>
-                                        {errors[field].message}
+                                        {errors[field].message as string}
                                     </Typography>}
                                 </ Fragment>
                         })}

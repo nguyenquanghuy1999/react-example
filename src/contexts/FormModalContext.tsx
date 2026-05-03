@@ -1,10 +1,21 @@
 import * as React from 'react';
 
+type FormModalContextProps = {
+    openModal: () => void,
+    setData: React.Dispatch<React.SetStateAction<{
+        id: null;
+        inputTitle: string;
+        inputDesc: string;
+        title: string;
+        isCreate: boolean;
+        isEdit: boolean;
+    }>>
 
+}
 
-export const FormModalContext = React.createContext();
+export const FormModalContext = React.createContext<FormModalContextProps | null>(null);
 
-export default function FormModalProvider({ children }) {
+export default function FormModalProvider({ children }: { children: React.ReactNode }) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -30,7 +41,7 @@ export default function FormModalProvider({ children }) {
         }}>
 
             {children}
-{/* 
+            {/* 
             <FormModal
                 data={data}
                 open={open}

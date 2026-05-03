@@ -44,6 +44,9 @@ export const resources = {
             { field: "price", headerName: "Price", flex: 1 },
             { field: "company", headerName: "Company", flex: 1 },
         ],
+        validationSchema: yup.object({
+
+        })
     },
 
 };

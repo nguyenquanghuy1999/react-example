@@ -3,23 +3,31 @@ import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
 import DraggableDialog from './DraggableDialog/DraggableDialog';
 import useResourceQuery from '@/hooks/queries';
 import { resources } from '@/config/resources';
+import OpenFormData from '@/types';
 
-function DataTable({ resource, onOpenForm }) {
+type DataTableProps = {
+    resource: string,
+    onOpenForm: (data: OpenFormData) => void
+}
+
+type ResourceKey = keyof typeof resources;
+
+function DataTable({ resource, onOpenForm }: DataTableProps) {
 
     const resourceQuery = useResourceQuery(resource);
 
-    const activeResource = resources[resource];
+    const activeResource = resources[resource as ResourceKey];
 
     const { data: resourceData, isLoading } = resourceQuery;
 
-
     const [DraggableDialogOpen, setDraggableDialogOpen] = useState(false);
-    const [data, setData] = useState(null);
+
+    const [data, setData] = useState<Record<string, any>>();
 
     const handleOpenDraggableDialog = () => {
         setDraggableDialogOpen(true);
@@ -29,7 +37,7 @@ function DataTable({ resource, onOpenForm }) {
         setDraggableDialogOpen(false);
     };
 
-    const columns = [
+    const columns: GridColDef[] = [
         ...activeResource.columns,
         {
             field: 'actions',

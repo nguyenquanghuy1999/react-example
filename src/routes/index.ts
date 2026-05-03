@@ -8,8 +8,8 @@ import NotFound from "@/pages/NotFound";
 const routes = [
     { path: '/', component: Home, layout: MainLayout },
     { path: '/about', component: About, layout: MainLayout },
-    { path: '/admin', component: AdminPanel, layout: null, protected: true },
-    { path: '/admin/:resource', component: AdminPanel, layout: null, protected: true },
+    { path: '/admin', component: AdminPanel, layout: null, protected: false },
+    { path: '/admin/:resource', component: AdminPanel, layout: null, protected: false },
     { path: '*', component: NotFound, layout: null }
 ];
 

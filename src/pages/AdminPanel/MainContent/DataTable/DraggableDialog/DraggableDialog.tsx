@@ -4,13 +4,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Paper from '@mui/material/Paper';
+import Paper, { PaperProps } from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import Draggable from 'react-draggable';
 import useResourceMutation from '@/hooks/mutations';
 
-function PaperComponent(props) {
+function PaperComponent(props: PaperProps) {
     const nodeRef = React.useRef(null);
     return (
         <Draggable
@@ -23,14 +23,20 @@ function PaperComponent(props) {
     );
 }
 
-function DraggableDialog({ data, open, onClose }) {
+type DraggableDialogProps = {
+    data: Record<string, any> | undefined;
+    open: boolean;
+    onClose: () => void;
+}
 
-    const resource = data.resource;
+function DraggableDialog({ data, open, onClose }: DraggableDialogProps) {
+
+    const resource = data?.resource;
 
     const { deleteResourceMutation } = useResourceMutation(resource);
 
     const handleDelete = () => {
-        deleteResourceMutation.mutate(data.id);
+        deleteResourceMutation.mutate(data?.id);
         onClose();
     }
 
